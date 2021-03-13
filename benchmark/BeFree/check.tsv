@@ -1,0 +1,69 @@
+	pmid	geneId	diseaseId	pred	g_name	d_name
+18	19059699	16187	D005198	1	IL-3	FBS
+32	19059699	207	C536227	1	AKT	hematopoiesis
+10	19059699	3674	D011535	1	CD41	PBS
+9	19059699	4352	D019337	1	Mpl | HLB219 | hlb219 | MPL	hematopoietic defect
+13	19059699	4352	D013921	1	Mpl | HLB219 | hlb219 | MPL	thrombocytopenia | Thrombocytopenia
+14	19059699	4352	C535982	1	Mpl | HLB219 | hlb219 | MPL	CAMT | autosomal recessive disease congenital amegakaryocytic thrombocytopenia
+15	19059699	4352	D011696	1	Mpl | HLB219 | hlb219 | MPL	thrombocytopenic
+28	19059699	4352	C536227	1	Mpl | HLB219 | hlb219 | MPL	hematopoiesis
+31	19059699	4352	D013922	1	Mpl | HLB219 | hlb219 | MPL	thrombocytosis
+51	19059699	4352	D001855	1	Mpl | HLB219 | hlb219 | MPL	bone marrow defect
+63	19059699	4352	D000740	1	Mpl | HLB219 | hlb219 | MPL	mild anemia
+65	19059699	4352	D007938	1	Mpl | HLB219 | hlb219 | MPL	leukemia
+66	19059699	5594	D013921	1	ERK	thrombocytopenia | Thrombocytopenia
+12	19059699	7066	D013921	1	thrombopoietin | TPO	thrombocytopenia | Thrombocytopenia
+41	29968748	4908	D009410	1	neurotrophin-3 | NT-3	neuronal death | neuronal damage | Sporadic neuronal death | neuronal injury | Neuronal injury
+0	29968748	5245	D000860	1	PhB | hypoxia and PhB | Hyp-PhB groups | hyp-PhB groups	hypoxia-induced seizures | hypoxia-induced neonatal seizures | hypoxia | hypoxia-seizures | hypoxia insult | hypoxia induced neonatal seizures | hypoxic pups
+1	29968748	5245	D008569	1	PhB | hypoxia and PhB | Hyp-PhB groups | hyp-PhB groups	impaired memory function | memory impairment
+2	29968748	5245	D001008	1	PhB | hypoxia and PhB | Hyp-PhB groups | hyp-PhB groups	anxiety | Anxiety
+3	29968748	5245	D012640	1	PhB | hypoxia and PhB | Hyp-PhB groups | hyp-PhB groups	Seizures | seizure | seizures | seizure-damage | convulsive | clonic-tonic seizures | tonic-clonic seizures
+5	29968748	5245	D009410	1	PhB | hypoxia and PhB | Hyp-PhB groups | hyp-PhB groups	neuronal death | neuronal damage | Sporadic neuronal death | neuronal injury | Neuronal injury
+6	29968748	5245	D013226	1	PhB | hypoxia and PhB | Hyp-PhB groups | hyp-PhB groups	status epilepticus
+11	29968748	5245	D004827	1	PhB | hypoxia and PhB | Hyp-PhB groups | hyp-PhB groups	neonatal seizures | epileptic | epilepsy
+26	29968748	5245	D020925	1	PhB | hypoxia and PhB | Hyp-PhB groups | hyp-PhB groups	hypoxic-ischemic | hypoxia-ischemia encephalopathy
+39	29968748	5245	D003294	1	PhB | hypoxia and PhB | Hyp-PhB groups | hyp-PhB groups	febrile seizures
+45	29968748	5245	D007035	1	PhB | hypoxia and PhB | Hyp-PhB groups | hyp-PhB groups	hypothermia
+46	29968748	5245	D000208	1	PhB | hypoxia and PhB | Hyp-PhB groups | hyp-PhB groups	acute damage
+47	29968748	5245	D012559	1	PhB | hypoxia and PhB | Hyp-PhB groups | hyp-PhB groups	schizophrenic
+53	29968748	5245	D009422	1	PhB | hypoxia and PhB | Hyp-PhB groups | hyp-PhB groups	neurological damage
+62	29968748	5245	D015430	1	PhB | hypoxia and PhB | Hyp-PhB groups | hyp-PhB groups	weight gain
+40	29968748	627	D009410	1	BDNF | brain-derived neurotrophic factor	neuronal death | neuronal damage | Sporadic neuronal death | neuronal injury | Neuronal injury
+7	29968748	759	D013226	1	CA1	status epilepticus
+37	29968748	759	D009410	1	CA1	neuronal death | neuronal damage | Sporadic neuronal death | neuronal injury | Neuronal injury
+8	29968748	761	D013226	1	CA3	status epilepticus
+19	31274189	2539	D006461	1	G6PD	haemolysis
+20	31274189	2539	D005955	1	G6PD	glucose-6-phosphate dehydrogenase (G6PD) deficiency | G6PD deficiency | G6PD-deficient
+23	31274189	2539	D016780	1	G6PD	P vivax malaria | P vivax infection | P vivax infections | infection of P vivax malaria | hypnozoite stage of P vivax malaria | P vivax parasitaemia | vivax parasitaemia
+56	31274189	6240	D008288	1	RR 1	malaria | Malaria | malaria disease | malaria infections
+33	32362813	10347	D000544	1	ABCA7 | ATP-binding cassette transporter A7	Alzheimer's Disease | Alzheimer's disease | AD | AD neuropathological hallmarks | familial AD | Alzheimer | AD brain reduced dendritic
+34	32362813	10347	D003072	1	ABCA7 | ATP-binding cassette transporter A7	loss of memory and cognitive impairment | cognitive impairment | Cognitive impairment likely | cognitive dysfunction | mild-cognitive impairment | cognitive decline | impacts cognitive function
+55	32362813	10347	D008569	1	ABCA7 | ATP-binding cassette transporter A7	memory loss | impaired spatial memory
+60	32362813	10490	C536767	1	SNARE	Garcia-Reitbock
+25	32362813	1742	D064420	1	PSD-95	Abeta toxicity
+38	32362813	1742	D000544	1	PSD-95	Alzheimer's Disease | Alzheimer's disease | AD | AD neuropathological hallmarks | familial AD | Alzheimer | AD brain reduced dendritic
+22	32362813	2041	D009461	1	EPHA1	synapse dysfunction | eFAD synapse dysfunction | LOAD synapse dysfunction
+54	32362813	23607	D000544	1	CD2AP | CD2-associated protein	Alzheimer's Disease | Alzheimer's disease | AD | AD neuropathological hallmarks | familial AD | Alzheimer | AD brain reduced dendritic
+17	32362813	23621	D000275	1	BACE1	depression
+43	32362813	274	D000014	1	BIN1 | Bridging integrator-1 | Bin1 | hBin1	SV recycling defects
+44	32362813	274	D012640	1	BIN1 | Bridging integrator-1 | Bin1 | hBin1	seizures
+52	32362813	274	D000544	1	BIN1 | Bridging integrator-1 | Bin1 | hBin1	Alzheimer's Disease | Alzheimer's disease | AD | AD neuropathological hallmarks | familial AD | Alzheimer | AD brain reduced dendritic
+61	32362813	274	D019636	1	BIN1 | Bridging integrator-1 | Bin1 | hBin1	neurodegenerative disease | neurodegeneration
+64	32362813	274	D009358	1	BIN1 | Bridging integrator-1 | Bin1 | hBin1	muscle defects
+50	32362813	2891	D000544	1	GluA2	Alzheimer's Disease | Alzheimer's disease | AD | AD neuropathological hallmarks | familial AD | Alzheimer | AD brain reduced dendritic
+36	32362813	348	C535882	1	APOE4 | Apolipoprotein E | APOE | ApoE | ApoE4	Johnson
+58	32362813	348	D000544	1	APOE4 | Apolipoprotein E | APOE | ApoE | ApoE4	Alzheimer's Disease | Alzheimer's disease | AD | AD neuropathological hallmarks | familial AD | Alzheimer | AD brain reduced dendritic
+4	32362813	351	D000275	1	Abeta | amyloid precursor protein	depression
+16	32362813	351	D009461	1	Abeta | amyloid precursor protein	synapse dysfunction | eFAD synapse dysfunction | LOAD synapse dysfunction
+21	32362813	351	D000544	1	Abeta | amyloid precursor protein	Alzheimer's Disease | Alzheimer's disease | AD | AD neuropathological hallmarks | familial AD | Alzheimer | AD brain reduced dendritic
+24	32362813	351	D064420	1	Abeta | amyloid precursor protein	Abeta toxicity
+27	32362813	351	D012421	1	Abeta | amyloid precursor protein	rupture
+29	32362813	351	D003072	1	Abeta | amyloid precursor protein	loss of memory and cognitive impairment | cognitive impairment | Cognitive impairment likely | cognitive dysfunction | mild-cognitive impairment | cognitive decline | impacts cognitive function
+48	32362813	351	D009410	1	Abeta | amyloid precursor protein	cortical neuronal death | neuronal toxicity
+35	32362813	3949	C535882	1	low-density lipoprotein receptor | LDLR	Johnson
+42	32362813	5663	D000544	1	PSEN1 | PS1	Alzheimer's Disease | Alzheimer's disease | AD | AD neuropathological hallmarks | familial AD | Alzheimer | AD brain reduced dendritic
+67	32362813	6616	D003072	1	SNAP-25	loss of memory and cognitive impairment | cognitive impairment | Cognitive impairment likely | cognitive dysfunction | mild-cognitive impairment | cognitive decline | impacts cognitive function
+59	32362813	6622	D010300	1	alpha-synuclein	Parkinson's disease
+30	32362813	6653	D000544	1	SORL1 | sortilin-related receptor | Sorla | LR11	Alzheimer's Disease | Alzheimer's disease | AD | AD neuropathological hallmarks | familial AD | Alzheimer | AD brain reduced dendritic
+57	32362813	6855	D000544	1	synaptophysin	Alzheimer's Disease | Alzheimer's disease | AD | AD neuropathological hallmarks | familial AD | Alzheimer | AD brain reduced dendritic
+49	32362813	8301	D000544	1	PICALM | CALM | clathrin assembly lymphoid myeloid leukemia	Alzheimer's Disease | Alzheimer's disease | AD | AD neuropathological hallmarks | familial AD | Alzheimer | AD brain reduced dendritic
