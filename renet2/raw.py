@@ -8,6 +8,7 @@ import sys
 import os
 #import tokenization
 import re
+from pathlib import Path
 
 def get_token_offset(tokens, sentences):
     token_offsets = []

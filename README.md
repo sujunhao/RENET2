@@ -87,9 +87,7 @@ Quick test after downloaded all required files
 
 ```
 # quick testing
-(cd renet2 && python predict_renet2_ft.py --raw_data_dir ../data/ft_data/ --model_dir ../models/ft_models/ --gda_fn_d ../data/ft_gda/ \
---models_number 4 --batch_size 8 --max_doc_num 10 --no_cache_file --no_cuda )
-
+python renet2/predict_renet2_ft.py --raw_data_dir data/ft_data/ --model_dir models/ft_models/ --gda_fn_d data/ft_gda/ --models_number 4 --batch_size 8 --max_doc_num 10 --no_cache_file --no_cuda
 
 # check predicted results
 # predicted gene-disease associations saved in data/ft_gda/gda_rst.tsv
@@ -131,23 +129,22 @@ Input data: PMID and PMCID list `RENET2/data/test/test_download_pmcid_list.csv`
 ```
 # download abstract and its annotations
 # (download abstract is required for the full-text case, as some full-text at PTC did not have an abstract section, should download separately)
-python download_data.py --process_n 3 --id_f ../test/test_download_pmcid_list.csv --type abs --dir ../data/raw_data/abs/
+python renet2/download_data.py --process_n 3 --id_f test/test_download_pmcid_list.csv --type abs --dir data/raw_data/abs/ --tmp_hit_f data/test_data/hit_id_l.csv
 
 # download full-text and its annotations
-python download_data.py --process_n 3 --id_f ../test/test_download_pmcid_list.csv --type ft --dir ../data/raw_data/ft/
-
+python renet2/download_data.py --process_n 3 --id_f test/test_download_pmcid_list.csv --type ft --dir data/raw_data/ft/ --tmp_hit_f data/test_data/hit_id_l.csv
 ```
 2. parse text and enetities annotations to RENET2 input format
 ```
 # parse data
-python parse_data.py --id_f ../test/test_download_pmcid_list.csv --type 'ft' --in_abs_dir ../data/raw_data/abs/  --in_ft_dir ../data/raw_data/ft/ --out_dir ../data/test_data/
-# normalize NET ID (optinal) 
-python normalize_ann.py --in_f ../data/test_data/anns.txt --out_f ../data/test_data/anns_n.txt
+python renet2/parse_data.py --id_f test/test_download_pmcid_list.csv --type 'ft' --in_abs_dir data/raw_data/abs/  --in_ft_dir data/raw_data/ft/ --out_dir data/test_data/
 
+# normalize NET ID (optinal) 
+python renet2/normalize_ann.py --in_f data/test_data/anns.txt --out_f data/test_data/anns_n.txt
 ```
 3. run RENET2 on parsed data
 ```
-python predict_renet2_ft.py --raw_data_dir ../data/test_data/ --model_dir ../models/ft_models/ --gda_fn_d ../data/test_data/ --models_number 4 --batch_size 8 --max_doc_num 10 --no_cache_file --no_cuda
+python renet2/predict_renet2_ft.py --raw_data_dir data/test_data/ --model_dir models/ft_models/ --gda_fn_d data/test_data/ --models_number 4 --batch_size 8 --max_doc_num 10 --no_cache_file --no_cuda
 ```
 Output data: predicted Gene-Disease Associations are stored in `RENET2/data/test_data/gda_rst.tsv`
 
@@ -302,14 +299,14 @@ cd renet2
 
 # downloading data
 # testing download abstracts data 
-python download_data.py --process_n 3 --id_f ../test/test_download_pmcid_list.csv --type abs --dir ../data/raw_data/abs/ 
+python renet2/download_data.py --process_n 3 --id_f test/test_download_pmcid_list.csv --type abs --dir data/raw_data/abs/ --tmp_hit_f data/test_data/hit_id_l.csv
 # testing download full-text data
-python download_data.py --process_n 3 --id_f ../test/test_download_pmcid_list.csv --type ft --dir ../data/raw_data/ft/
+python renet2/download_data.py --process_n 3 --id_f test/test_download_pmcid_list.csv --type ft --dir data/raw_data/ft/ --tmp_hit_f data/test_data/hit_id_l.csv
 
 # parsing data
-python parse_data.py --id_f ../test/test_download_pmcid_list.csv --type 'ft' --in_abs_dir ../data/raw_data/abs/  --in_ft_dir ../data/raw_data/ft/ --out_dir ../data/test_data/
+python renet2/parse_data.py --id_f test/test_download_pmcid_list.csv --type 'ft' --in_abs_dir data/raw_data/abs/  --in_ft_dir data/raw_data/ft/ --out_dir data/test_data/
 # (optional) normalize annotated ID
-python normalize_ann.py --in_f ../data/test_data/anns.txt --out_f ../data/test_data/anns_n.txt
+python renet2/normalize_ann.py --in_f data/test_data/anns.txt --out_f data/test_data/anns_n.txt
 ```          
 
 ## (Optional) Visualization

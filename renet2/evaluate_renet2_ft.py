@@ -86,7 +86,8 @@ def renet2_evaluate(args, _read_batch_idx=0, loaded_feature=None):
         model.to(args.device)
 	        
         pred_l, tru_l, S, pred_o = eval(model, dataloader_ft_sub, args, 'test')
-        free_cuda()
+        if not args.no_cuda:
+            free_cuda()
         y_info = features_ft_sub[1].copy()
         y_info['pred'] = pred_l
         y_info['prob'] = pred_o
@@ -325,6 +326,7 @@ def main():
     # set up
     parser = init_self_parser()
     args = parser.parse_args()
+    get_index_path(args)
 
     if len(sys.argv[1:]) == 0:
         parser.print_help()

@@ -923,6 +923,7 @@ def main():
     # set up
     parser = init_self_parser()
     args = parser.parse_args()
+    get_index_path(args)
 
     if len(sys.argv[1:]) == 0:
         parser.print_help()

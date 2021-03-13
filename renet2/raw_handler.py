@@ -6,6 +6,7 @@ import random
 import pandas as pd
 import numpy as np
 import torch
+from pathlib import Path
 
 from raw import load_documents, load_documents_ori
 from sklearn.model_selection import train_test_split
@@ -569,6 +570,9 @@ def init_parser():
                                 help='do not use x_feature')
     return parser
 
+def get_index_path(args):
+    base_path = Path(__file__).parent
+    args.word_index_fn = (base_path / args.word_index_fn).resolve()
 
 def print_renet2_log():
     _log = """
