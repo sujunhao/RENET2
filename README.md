@@ -87,7 +87,8 @@ Quick test after downloaded all required files
 
 ```
 # quick testing
-python renet2/predict_renet2_ft.py --raw_data_dir data/ft_data/ --model_dir models/ft_models/ --gda_fn_d data/ft_gda/ --models_number 4 --batch_size 8 --max_doc_num 10 --no_cache_file --no_cuda
+python renet2/predict_renet2_ft.py --raw_data_dir data/ft_data/ --gda_fn_d data/ft_gda/ --models_number 4 --batch_size 8 --max_doc_num 10 --no_cache_file --no_cuda --use_fix_pretrained_models
+
 
 # check predicted results
 # predicted gene-disease associations saved in data/ft_gda/gda_rst.tsv
@@ -101,19 +102,19 @@ less data/ft_gda/gda_rst.tsv
 ## use --help to check more information
 ## use --no_cuda if you don't want to use GPUs
 
-cd renet2
 
 # train 10 RENET2 models (optional, trained model already in the models dir)
-python train_renet2_ft.py --raw_data_dir ../data/ft_data/ --annotation_info_dir ../data/ft_info --model_dir ../models/ft_models/ --pretrained_model_p ../models/Bst_abs_10  --epochs 10 --models_number 10 --batch_size 60 --have_SiDa ../data/ft_info/ft_base/ft_base --gda_fn_d ../data/ft_gda_train/
+python renet2/train_renet2_ft.py --raw_data_dir data/ft_data/ --annotation_info_dir data/ft_info --model_dir models/ft_models/ --pretrained_model_p models/Bst_abs_10  --epochs 10 --models_number 10 --batch_size 60 --have_SiDa data/ft_info/ft_base/ft_base --gda_fn_d data/ft_gda/
+
 
 # use trained RENET2 models to predict GDAs (using --is_sensitive_mode to enable RENET2-Sensitive mode)
-python predict_renet2_ft.py --raw_data_dir ../data/ft_data/ --model_dir ../models/ft_models/ --models_number 10 --batch_size 60 --gda_fn_d ../data/ft_gda/ 
+python renet2/predict_renet2_ft.py --raw_data_dir data/ft_data/ --model_dir models/ft_models/ --models_number 10 --batch_size 60 --gda_fn_d data/ft_gda/ 
 
 # check predicted GDAs
 less ../data/ft_gda/gda_rst.tsv
 
 # apply 5-fold cross-validation to test RENET2 performance
-python evaluate_renet2_ft_cv.py --epochs 10 --raw_data_dir ../data/ft_data/ --rst_file_prefix ft_base --have_SiDa ../data/ft_info/ft_base/ft_base --pretrained_model_p ../models/Bst_abs_10 --no_cache_file  
+python renet2/evaluate_renet2_ft_cv.py --epochs 10 --raw_data_dir data/ft_data/ --annotation_info_dir data/ft_info/ --rst_file_prefix ft_base --have_SiDa data/ft_info/ft_base/ft_base --pretrained_model_p models/Bst_abs_10 --no_cache_file
 ```
 
 ### Pipeline: Use RENET2 to Predict Gene-Disease Associations from Articles ID

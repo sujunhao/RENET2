@@ -268,6 +268,8 @@ def init_self_parser():
             type=str,
             help="pretrained based models",
     )
+    parser.add_argument('--use_fix_pretrained_models', action='store_true', default=False,
+                                help='use fix pretrained models trained on RENET2 full-text dataset default: %(default)s')
     parser.add_argument('--no_cuda', action='store_true', default=False,
                                 help='disables CUDA training default: %(default)s')
     parser.add_argument('--seed', type=int, default=42, metavar='S',
@@ -324,7 +326,12 @@ def main():
     # set up
     parser = init_self_parser()
     args = parser.parse_args()
+
     get_index_path(args)
+
+    base_path = Path(__file__).parent
+    if args.use_fix_pretrained_models:
+        args.model_dir = (base_path / args.model_dir).resolve()
 
 
     if len(sys.argv[1:]) == 0:
