@@ -1,4 +1,4 @@
-# RENET2 -  High-Performance Full-Text Gene-Disease Relation Extraction with Iterative Training Data Expansion
+# RENET2: High-Performance Full-text Gene-Disease Relation Extraction with Iterative Training Data Expansion
 
 ---
 ![RENET2 logo](/data/image/RENET2_logo.png "RENET2 logo")
@@ -11,7 +11,7 @@ Email: jhsu@cs.hku.hk
 
 ## Introduction
 
-Relation extraction is a fundamental task for extracting gene-disease associations from biomedical text. Existing tools have limited capacity, as they can only extract gene-disease associations from single sentences or abstract texts. In this work, we propose RENET2, a deep learning-based relation extraction method, which implements section filtering and ambiguous relations modeling to extract gene-disease associations from full-text articles. RENET2 adopted a novel iterative data expansion strategy to build an annotated full-text dataset to resolve the scarcity of labels on full-text articles.
+Relation extraction is a fundamental task for extracting gene-disease associations from biomedical text. Existing tools have limited capacity, as they can extract gene-disease associations only from single sentences or abstract texts. In this work, we propose RENET2, a deep learning-based relation extraction method, which implements section filtering and ambiguous relations modeling to extract gene-disease associations from full-text articles. We designed a novel iterative training data expansion strategy to build an annotated full-text dataset to resolve the scarcity of labels on full-text articles. In our experiments, RENET2 achieved an F1-score of 72.13% for extracting gene-disease associations from an annotated full-text dataset, which was 27.22%, 30.30% and 29.24% higher than the best existing tools BeFree, DTMiner and BioBERT, respectively. We applied RENET2 to (1) ~1.89M full-text articles from PMC and found ~3.72M gene-disease associations; and (2) the LitCovid articles set and ranked the top 15 proteins associated with COVID-19, supported by recent articles. RENET2 is an efficient and accurate method for full-text gene-disease association extraction. The source-code, manually curated abstract/full-text training data, and results of RENET2 are available at this repo.
 
 ---
 
