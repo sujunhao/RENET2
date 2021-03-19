@@ -87,7 +87,7 @@ Quick test after downloaded all required files
 
 ```
 # quick testing
-python renet2/predict_renet2_ft.py --raw_data_dir data/ft_data/ --gda_fn_d data/ft_gda/ --models_number 4 --batch_size 8 --max_doc_num 10 --no_cache_file --no_cuda --use_fix_pretrained_models
+python renet2/predict_renet2_ft.py --raw_data_dir data/ft_data/ --gda_fn_d data/ft_gda/ --models_number 4 --batch_size 8 --max_doc_num 10 --no_cache_file --use_fix_pretrained_models
 
 
 # check predicted results
@@ -100,21 +100,21 @@ less data/ft_gda/gda_rst.tsv
 ```
 ## make sure you downloaded data and models at the [Download Data and Trained Models] section
 ## use --help to check more information
-## use --no_cuda if you don't want to use GPUs
+## use --use_cuda if you want to use GPUs
 
 
 # train 10 RENET2 models (optional, trained model already in the models dir)
-python renet2/train_renet2_ft.py --raw_data_dir data/ft_data/ --annotation_info_dir data/ft_info --model_dir models/ft_models/ --pretrained_model_p models/Bst_abs_10  --epochs 10 --models_number 10 --batch_size 60 --have_SiDa data/ft_info/ft_base/ft_base --gda_fn_d data/ft_gda/
+python renet2/train_renet2_ft.py --raw_data_dir data/ft_data/ --annotation_info_dir data/ft_info --model_dir models/ft_models/ --pretrained_model_p models/Bst_abs_10  --epochs 10 --models_number 10 --batch_size 60 --have_SiDa data/ft_info/ft_base/ft_base --gda_fn_d data/ft_gda/ --use_cuda
 
 
 # use trained RENET2 models to predict GDAs (using --is_sensitive_mode to enable RENET2-Sensitive mode)
-python renet2/predict_renet2_ft.py --raw_data_dir data/ft_data/ --model_dir models/ft_models/ --models_number 10 --batch_size 60 --gda_fn_d data/ft_gda/ 
+python renet2/predict_renet2_ft.py --raw_data_dir data/ft_data/ --model_dir models/ft_models/ --models_number 10 --batch_size 60 --gda_fn_d data/ft_gda/ --use_cuda
 
 # check predicted GDAs
 less ../data/ft_gda/gda_rst.tsv
 
 # apply 5-fold cross-validation to test RENET2 performance
-python renet2/evaluate_renet2_ft_cv.py --epochs 10 --raw_data_dir data/ft_data/ --annotation_info_dir data/ft_info/ --rst_file_prefix ft_base --have_SiDa data/ft_info/ft_base/ft_base --pretrained_model_p models/Bst_abs_10 --no_cache_file
+python renet2/evaluate_renet2_ft_cv.py --epochs 10 --raw_data_dir data/ft_data/ --annotation_info_dir data/ft_info/ --rst_file_prefix ft_base --have_SiDa data/ft_info/ft_base/ft_base --pretrained_model_p models/Bst_abs_10 --no_cache_file --use_cuda
 ```
 
 ### Pipeline: Use RENET2 to Predict Gene-Disease Associations from Articles ID
@@ -145,7 +145,7 @@ python renet2/normalize_ann.py --in_f data/test_data/anns.txt --out_f data/test_
 ```
 3. run RENET2 on parsed data
 ```
-python renet2/predict_renet2_ft.py --raw_data_dir data/test_data/ --model_dir models/ft_models/ --gda_fn_d data/test_data/ --models_number 4 --batch_size 8 --max_doc_num 10 --no_cache_file --no_cuda
+python renet2/predict_renet2_ft.py --raw_data_dir data/test_data/ --model_dir models/ft_models/ --gda_fn_d data/test_data/ --models_number 4 --batch_size 8 --max_doc_num 10 --no_cache_file 
 ```
 Output data: predicted Gene-Disease Associations are stored in `RENET2/data/test_data/gda_rst.tsv`
 

@@ -270,8 +270,8 @@ def init_self_parser():
     )
     parser.add_argument('--use_fix_pretrained_models', action='store_true', default=False,
                                 help='use fix pretrained models trained on RENET2 full-text dataset default: %(default)s')
-    parser.add_argument('--no_cuda', action='store_true', default=False,
-                                help='disables CUDA training default: %(default)s')
+    parser.add_argument('--use_cuda', action='store_true', default=False,
+                                help='enables CUDA training default: %(default)s')
     parser.add_argument('--seed', type=int, default=42, metavar='S',
                                 help='random seed default: %(default)s')
     parser.add_argument('--fix_snt_n', type=int, default=400, metavar='N',
@@ -341,6 +341,7 @@ def main():
 
     _start_time = time.time()
 
+    args.no_cuda = not args.use_cuda
     use_cuda = torch.cuda.is_available() and not args.no_cuda
     device = torch.device('cuda' if use_cuda else 'cpu')
     if use_cuda:

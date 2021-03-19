@@ -864,8 +864,10 @@ def init_self_parser():
             type=str,
             help="pretrained based models",
     )
-    parser.add_argument('--no_cuda', action='store_true', default=False,
-                                help='disables CUDA training default: %(default)s')
+    parser.add_argument('--use_cuda', action='store_true', default=False,
+                                help='enables CUDA training default: %(default)s')
+    #parser.add_argument('--no_cuda', action='store_true', default=False,
+    #                            help='disables CUDA training default: %(default)s')
     parser.add_argument('--seed', type=int, default=42, metavar='S',
                                 help='random seed default: %(default)s')
     parser.add_argument('--fix_snt_n', type=int, default=400, metavar='N',
@@ -913,6 +915,7 @@ def main():
     args = parser.parse_args()
     get_index_path(args)
 
+    args.no_cuda = not args.use_cuda
     if len(sys.argv[1:]) == 0:
         parser.print_help()
         sys.exit(1)
