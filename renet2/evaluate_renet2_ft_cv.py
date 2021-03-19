@@ -925,6 +925,7 @@ def main():
     # set up
     parser = init_self_parser()
     args = parser.parse_args()
+    get_index_path(args)
 
     args.no_cuda = not args.use_cuda
     if len(sys.argv[1:]) == 0:
