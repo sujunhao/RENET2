@@ -1,6 +1,11 @@
 #!/bin/bash
 set -x
 
+mkdir -p $1
+cd $1
+mkdir -p data/{abs_data,ft_data,ft_info}
+mkdir -p models
+
 # download data
 ## download abstract dataset [dir: renet2/data/abs_data]
 (cd data/abs_data && wget http://www.bio8.cs.hku.hk/RENET2/renet2_abs_data.tar.gz && tar -xf renet2_abs_data.tar.gz && rm renet2_abs_data.tar.gz )

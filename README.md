@@ -1,7 +1,7 @@
 # RENET2: High-Performance Full-text Gene-Disease Relation Extraction with Iterative Training Data Expansion
 
 ---
-![RENET2 logo](/data/image/RENET2_logo.png "RENET2 logo")
+![RENET2 logo](/repo_f/RENET2_logo.png "RENET2 logo")
 
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
@@ -318,7 +318,7 @@ Found and visualze a pair of gene-disease annotation obtrained from Pubtar Centr
 ```
 run ./renet2/vis_text.ipynb on jupyter notebook
 ```
-![RENET2 vis](/data/image/RENET2_vis.png "RENET2 vis")
+![RENET2 vis](/repo_f/RENET2_vis.png "RENET2 vis")
 
 
 ## (Manually) Download Data and Trained Models
