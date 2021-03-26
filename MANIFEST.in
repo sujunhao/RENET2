@@ -1,0 +1,3 @@
+include src/renet2/resource/*.txt
+include src/renet2/utils/word_index
+include src/renet2/tools/geniass-1.00.tar.gz

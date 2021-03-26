@@ -1,7 +1,7 @@
 # coding=utf-8
-from utils.tokenizer import tokenize
-from utils.ann_utils import *
-from utils.sequence_utils import *
+from renet2.utils.tokenizer import tokenize
+from renet2.utils.ann_utils import *
+from renet2.utils.sequence_utils import *
 import numpy as np
 import pandas as pd
 import sys

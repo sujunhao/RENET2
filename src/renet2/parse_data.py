@@ -456,7 +456,7 @@ def parse_data_lst_hd(tar_id_lst, in_pmid_d, in_pmcid_d, parse_t, out_dir, if_ha
     def split_snt(new_data_dir):
         # geniass path
         g_path = print( os.path.dirname(os.path.realpath(__file__)))
-        cmd = os.path.dirname(os.path.realpath(__file__)) + "/../tools/geniass/run_geniass.sh " + \
+        cmd = os.path.dirname(os.path.realpath(__file__)) + "/tools/geniass/run_geniass.sh " + \
                          new_data_dir + "docs.txt" + " " + \
                          new_data_dir + "sentences.txt " + \
                          subprocess.check_output(['which', 'ruby']).strip().decode("utf-8")
@@ -645,6 +645,7 @@ def parse_data(config):
 
 
 def main():
+    print("***\nplease make sure to use 'renet2 install_geniass' to install the sentence splliter, before running the parse_data\n***\n")
     parser = argparse.ArgumentParser(description="parse abstrcts/full-text pubtator/json file to RENET2 input format")
 
     parser.add_argument('--id_f', type=str, default="../test/test_download_pmid_list.csv",

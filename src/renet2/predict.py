@@ -22,9 +22,9 @@ from sklearn.model_selection import KFold
 
 # from tqdm import tqdm|
 
-from raw import load_documents, load_documents_batch
-from raw_handler import *
-from model import *
+from renet2.raw import load_documents, load_documents_batch
+from renet2.raw_handler import *
+from renet2.model import *
 
 _G_eval_time = 0
 
@@ -41,8 +41,6 @@ def free_cuda():
         
 def renet2_evaluate(args, _read_batch_idx=0, loaded_feature=None):
 
-    old_data_dir = args.annotation_info_dir
-    # write annotated table to model input file
     # read data
     print('reading input at {}'.format(args.raw_data_dir))
     features_ft_sub = None
@@ -117,10 +115,13 @@ def renet2_evaluate(args, _read_batch_idx=0, loaded_feature=None):
     
     m_df['hit_cnt'] = m_df.apply(lambda x: sum([x['pred_%02d'%(_i+1)] for _i in range(args.models_number)]), axis=1)
     
+    _cutoff = int(args.models_number/2)
+    if args.is_sensitive_mode:
+        _cutoff = 1
 
-    print('assemble models using cutoff {}'.format(int(args.models_number/2)))
+    print('assemble models using cutoff {}'.format(_cutoff))
     ReNet_df = m_df[['pmid', 'geneId', 'diseaseId']].copy()
-    ReNet_df['pred'] = m_df.apply(lambda x: 1 if x['hit_cnt'] >= int(args.models_number/2) else 0, axis=1)
+    ReNet_df['pred'] = m_df.apply(lambda x: 1 if x['hit_cnt'] >= _cutoff else 0, axis=1)
     cols_n = ['prob_%02d' % (_i+1) for _i in range(args.models_number)]
     #print(m_df.head())
     ReNet_df['prob_avg'] = m_df[cols_n].mean(axis=1)
@@ -209,18 +210,12 @@ def renet2_evaluate(args, _read_batch_idx=0, loaded_feature=None):
 
 def init_self_parser():
     # set up
-    parser = argparse.ArgumentParser(description='RENET2 training models [assemble, full-text] and testing')
+    parser = argparse.ArgumentParser(description='RENET2 testing models [assemble, full-text]')
     parser.add_argument(
             "--raw_data_dir",
             default = "../data/ft_data/",
             type=str,
             help="input data folder",
-    )
-    parser.add_argument(
-            "--annotation_info_dir",
-            default = "../data/ft_info",
-            type=str,
-            help="annotation data folder",
     )
 
     parser.add_argument(
@@ -250,7 +245,7 @@ def init_self_parser():
     )
     parser.add_argument(
             "--file_name_ann",
-            default = "anns.txt",
+            default = "anns_n.txt",
             type=str,
             help="anns file name",
     )
@@ -273,8 +268,10 @@ def init_self_parser():
             type=str,
             help="pretrained based models",
     )
-    parser.add_argument('--no_cuda', action='store_true', default=False,
-                                help='disables CUDA training default: %(default)s')
+    #parser.add_argument('--use_fix_pretrained_models', action='store_true', default=False,
+    #                            help='use fix pretrained models trained on RENET2 full-text dataset default: %(default)s')
+    parser.add_argument('--use_cuda', action='store_true', default=False,
+                                help='enables CUDA training default: %(default)s')
     parser.add_argument('--seed', type=int, default=42, metavar='S',
                                 help='random seed default: %(default)s')
     parser.add_argument('--fix_snt_n', type=int, default=400, metavar='N',
@@ -310,6 +307,8 @@ def init_self_parser():
                                 help='raw data read max doc batch number resume default: %(default)s')
 
     # explore args, disable
+    parser.add_argument('--is_filter_sub', action='store_true', default=False,
+                                help='filter pmid in abs data')
     parser.add_argument('--read_ori_token', action='store_true', default=False,
                                 help='get raw text')
     parser.add_argument('--not_x_feature', action='store_true', default=False,
@@ -318,15 +317,23 @@ def init_self_parser():
                                 help='reading dga files')
     parser.add_argument('--using_new_tokenizer', action='store_true', default=False,
                                 help='using new tokenizer')
-    parser.add_argument('--is_filter_sub', action='store_true', default=False,
-                                help='filter pmid in abs data')
+    parser.add_argument('--is_sensitive_mode', action='store_true', default=False,
+                                help='using sensitive mode')
     return parser
 
 def main():
     # set up
     parser = init_self_parser()
     args = parser.parse_args()
+
     get_index_path(args)
+
+    #base_path = Path(__file__).parent
+    #if args.use_fix_pretrained_models:
+    #    args.model_dir = (base_path / args.model_dir).resolve()
+
+    base_dir = os.path.dirname(__file__)  
+    sys.path.insert(0, base_dir)
 
     if len(sys.argv[1:]) == 0:
         parser.print_help()
@@ -335,6 +342,7 @@ def main():
 
     _start_time = time.time()
 
+    args.no_cuda = not args.use_cuda
     use_cuda = torch.cuda.is_available() and not args.no_cuda
     device = torch.device('cuda' if use_cuda else 'cpu')
     if use_cuda:

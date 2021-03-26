@@ -8,7 +8,7 @@ import numpy as np
 import torch
 from pathlib import Path
 
-from raw import load_documents, load_documents_ori
+from renet2.raw import load_documents, load_documents_ori
 from sklearn.model_selection import train_test_split
 #from tokenizers import BertWordPieceTokenizer
 from torch.utils.data import Dataset, DataLoader, RandomSampler, SequentialSampler, \
@@ -127,8 +127,6 @@ def load_and_cache_data(args, get_id_l=False):
     if args.using_new_tokenizer:
         cached_features_file += "_nt"
 
-    if args.is_filter_sub:
-        cached_features_file += "_sub"
     if args.add_cache_suf:
         cached_features_file += args.add_cache_suf
     if os.path.exists(cached_features_file) and not args.overwrite_cache and not get_id_l:
@@ -520,7 +518,7 @@ def init_parser():
     )
     parser.add_argument(
             "--word_index_fn",
-            default = "/mnt/bal31/jhsu/home/git/renet2/src/utils/word_index",
+            default = "./utils/word_index",
             type=str,
             help="word index data dir",
     )

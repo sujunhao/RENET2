@@ -1,0 +1,3 @@
+[console_scripts]
+renet2 = renet2.renet2:main
+

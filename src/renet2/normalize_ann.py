@@ -7,10 +7,7 @@ import json
 import subprocess
 
 sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
-
-
-
-from utils.ann_utils import *
+from renet2.utils.ann_utils import *
 
 
 def add_d_items(d, k, v):
@@ -154,6 +151,7 @@ def main():
         sys.exit(1)
 
     normalize_ann(args)
+    print('done')
 
 
 if __name__ == "__main__":

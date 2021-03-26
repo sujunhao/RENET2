@@ -22,9 +22,9 @@ from sklearn.model_selection import KFold
 
 # from tqdm import tqdm|
 
-from raw import load_documents, load_documents_batch
-from raw_handler import *
-from model import *
+from renet2.raw import load_documents, load_documents_batch
+from renet2.raw_handler import *
+from renet2.model import *
 
 _G_eval_time = 0
 
@@ -322,7 +322,7 @@ def init_self_parser():
     return parser
 
 def main():
-    print_renet2_log()
+    #print_renet2_log()
     # set up
     parser = init_self_parser()
     args = parser.parse_args()
@@ -333,6 +333,8 @@ def main():
     if args.use_fix_pretrained_models:
         args.model_dir = (base_path / args.model_dir).resolve()
 
+    base_dir = os.path.dirname(__file__)  
+    sys.path.insert(0, base_dir)
 
     if len(sys.argv[1:]) == 0:
         parser.print_help()

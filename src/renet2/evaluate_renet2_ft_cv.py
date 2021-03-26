@@ -22,9 +22,9 @@ from sklearn.model_selection import KFold
 
 # from tqdm import tqdm|
 
-from raw import load_documents
-from raw_handler import *
-from model import *
+from renet2.raw import load_documents
+from renet2.raw_handler import *
+from renet2.model import *
 
 
 
@@ -921,11 +921,13 @@ def init_self_parser():
     return parser
 
 def main():
-    print_renet2_log()
     # set up
     parser = init_self_parser()
     args = parser.parse_args()
     get_index_path(args)
+
+    base_dir = os.path.dirname(__file__)  
+    sys.path.insert(0, base_dir)
 
     args.no_cuda = not args.use_cuda
     if len(sys.argv[1:]) == 0:
