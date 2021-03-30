@@ -161,8 +161,8 @@ renet2 download_data --process_n 3 --id_f ${R2_DIR}/test/test_download_pmcid_lis
 2. parse text and enetities annotations to RENET2 input format
 ```
 # parse data
-renet2 install_geniass 						# install geniass, only run one time
-conda install ruby                          # install ruby for 
+renet2 install_geniass          # install geniass, only run one time
+conda install ruby              # install ruby
 renet2 parse_data --id_f ${R2_DIR}/test/test_download_pmcid_list.csv --type 'ft' --in_abs_dir ${R2_DIR}/data/raw_data/abs/  --in_ft_dir ${R2_DIR}/data/raw_data/ft/ --out_dir ${R2_DIR}/data/test_data/
 
 # normalize NET ID (optinal) 
