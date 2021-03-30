@@ -136,6 +136,7 @@ MODEL_DIR=${R2_DIR}/models/ft_models_test
 renet2 train --raw_data_dir ${R2_DIR}/data/ft_data/ --annotation_info_dir ${R2_DIR}/data/ft_info --model_dir ${MODEL_DIR} --pretrained_model_p ${R2_DIR}/models/Bst_abs_10  --epochs 10 --models_number 10 --batch_size 60 --have_SiDa ${R2_DIR}/data/ft_info/ft_base/ft_base --gda_fn_d ${R2_DIR}/data/ft_gda/ --use_cuda
 
 # use trained RENET2 models to predict GDAs (using --is_sensitive_mode to enable RENET2-Sensitive mode)
+# maximum using 10 models to predict
 renet2 predict --raw_data_dir ${R2_DIR}/data/ft_data/ --model_dir ${MODEL_DIR} --models_number 2 --batch_size 60 --gda_fn_d ${R2_DIR}/data/ft_gda/ --use_cuda
 
 # check predicted GDAs
