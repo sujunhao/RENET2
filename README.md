@@ -26,7 +26,6 @@ Relation extraction is a fundamental task for extracting gene-disease associatio
 - [Modules Descriptions](#modules-descriptions)
 - [Benchmark](#benchmark)
 - [(Optional) Visualization](#optional-visualization)
-- [(Manually) Download Data and Trained Models](#manually-download-data-and-trained-models)
 
 ---
 
