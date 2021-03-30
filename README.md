@@ -73,13 +73,13 @@ Download all required files
 ### if RENET2 is installed from Bioconda
 mkdir RENET2
 cd RENET2
-RENET2_DATA_S_URL=https://raw.githubusercontent.com/sujunhao/RENET2/py_package/src/renet2/download_renet2_data_bal_v.sh
+RENET2_DATA_S_URL=https://raw.githubusercontent.com/sujunhao/RENET2/py_package/src/renet2/download_renet2_data.sh
 curl -s ${RENET2_DATA_S_URL} | bash -s .
 R2_DIR=$(pwd)
 
 ### if RENET2 is installed from GitHub
 #### make sure you are in the root dir of RENET2
-bash src/renet2/download_renet2_data_bal_v.sh .
+bash src/renet2/download_renet2_data.sh .
 R2_DIR=$(pwd)
 ```
 
