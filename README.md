@@ -50,8 +50,8 @@ renet2 --help
 
 ```bash
 # create renet2 env
-conda create -n renet2-env1 python=3.7
-conda activate renet2-env1
+conda create -n renet2-env python=3.7
+conda activate renet2-env
 
 # install required package
 conda install -c conda-forge ruby scikit-learn=0.22.2.post1 pandas=1.0.1 numpy=1.18.1 tqdm=4.42.1
@@ -59,7 +59,10 @@ conda install pytorch==1.2.0 cudatoolkit=10.0 -c pytorch
 
 git clone https://github.com/sujunhao/RENET2.git
 cd RENET2 
+pip install . --no-deps --ignore-installed
 
+# run renet2 like this afterwards
+renet2 --help
 ```
 
 ## Download Data and Trained Model
@@ -68,7 +71,6 @@ Download all required files
 
 ```
 ### If RENET2 is installed from Bioconda
-
 mkdir RENET2
 cd RENET2
 RENET2_DATA_S_URL=https://raw.githubusercontent.com/sujunhao/RENET2/py_package/src/renet2/download_renet2_data_bal_v.sh
@@ -250,7 +252,7 @@ Modules in `renet2` are for model training/testing.
 
 *For the Modules listed below, please use the `-h` or `--help` option for checking available options.*
 
-`renet2` |
+`renet2` | renet2 program
 ---: | ---
 `train` | Module for training RENET2 models.
 `predict` | Using RENET2 models to predict gene-disease associations.
