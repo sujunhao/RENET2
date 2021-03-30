@@ -77,11 +77,9 @@ RENET2_DATA_S_URL=https://raw.githubusercontent.com/sujunhao/RENET2/py_package/s
 curl -s ${RENET2_DATA_S_URL} | bash -s .
 R2_DIR=$(pwd)
 
-
 ### if RENET2 is installed from GitHub
 #### make sure you are in the root dir of RENET2
-RENET2_DATA_S=download_renet2_data_bal_v.sh
-bash src/renet2/$(RENET2_DATA_S)
+bash src/renet2/download_renet2_data_bal_v.sh .
 R2_DIR=$(pwd)
 ```
 
@@ -91,7 +89,6 @@ R2_DIR=$(pwd)
 # quick testing
 R2_DIR="[DATA/MODEL_PATH]"                                     # e.g. ~/git/RENET2, check 'Download Data and Trained Models'
 renet2 predict --raw_data_dir ${R2_DIR}/data/ft_data/ --gda_fn_d ${R2_DIR}/data/ft_gda/ --models_number 4 --batch_size 8 --max_doc_num 10 --no_cache_file  --model_dir ${R2_DIR}/models/ft_models/
-
 
 # check predicted results
 # predicted gene-disease associations
