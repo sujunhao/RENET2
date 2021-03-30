@@ -70,7 +70,7 @@ renet2 --help
 Download all required files
 
 ```
-### If RENET2 is installed from Bioconda
+### if RENET2 is installed from Bioconda
 mkdir RENET2
 cd RENET2
 RENET2_DATA_S_URL=https://raw.githubusercontent.com/sujunhao/RENET2/py_package/src/renet2/download_renet2_data_bal_v.sh
@@ -78,7 +78,7 @@ curl -s ${RENET2_DATA_S_URL} | bash -s .
 R2_DIR=$(pwd)
 
 
-### If RENET2 is installed from GitHub
+### if RENET2 is installed from GitHub
 #### make sure you are in the root dir of RENET2
 RENET2_DATA_S=download_renet2_data_bal_v.sh
 bash src/renet2/$(RENET2_DATA_S)
@@ -260,7 +260,7 @@ Modules in `renet2` are for model training/testing.
 `download_data` | Downloading articles from PMC/PTC with provided PMID/PMCID list. (please check example an RENET2/src/nb_scripts/pre_precoss/ for full-text dataset)
 `parse_data` | Parsing articles from RENET2. (please check example an RENET2/src/nb_scripts/pre_precoss/ for full-text dataset)
 `normalize_ann` | Normlize the annotation ID
-`install_geniass` | install geniass for parse_data module, if fail, please try `conda install ruby` to install ruby first
+`install_geniass` | Install geniass for parse_data module, if fail, please try `conda install ruby` to install ruby first
 
 
 ## Benchmark
