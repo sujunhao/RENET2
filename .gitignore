@@ -18,3 +18,6 @@ models/
 tools/geniass/
 data/ft_gda/
 *.swo
+dist/
+build/
+MANIFEST

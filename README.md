@@ -1,7 +1,7 @@
 # RENET2: High-Performance Full-text Gene-Disease Relation Extraction with Iterative Training Data Expansion
 
 ---
-![RENET2 logo](/data/image/RENET2_logo.png "RENET2 logo")
+![RENET2 logo](/repo_f/RENET2_logo.png "RENET2 logo")
 
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
@@ -18,141 +18,168 @@ Relation extraction is a fundamental task for extracting gene-disease associatio
 ## Contents
 
 - [What's new](#whats-new)
-- [Folder Structure](#folder-structure)
 - [Installation](#installation)
 - [Download Data and Trained Models](#download-data-and-trained-models)
-- [Run RENET2 Model](#run-renet2-model)
+- [Usage](#usage)
 - [Understand Output File](#understand-output-file)
 - [Dataset](#dataset)
 - [Modules Descriptions](#modules-descriptions)
 - [Benchmark](#benchmark)
-- [(Optional) Data Preparing](#optional-data-preparing)
 - [(Optional) Visualization](#optional-visualization)
 - [(Manually) Download Data and Trained Models](#manually-download-data-and-trained-models)
 
 ---
+
 ## What's new?
 
 - 20210330
+
 we can install RENET2 via bioconda now! and the code for the RENET2 is refined as a python package.
-
-## Folder Structure
-
-    .
-    ├── renet2              # RENET2 scource codes
-    ├── data                # RENET2 data
-    ├── models              # RENET2 trained models
-    ├── tools               # Utils tools
-    ├── benchmark           # Benchmark codes for BeFree/DTMiner/BioBERT
-    ├── test                # Addtional test dir
-    └── README.md           
 
 ## Installation
 
-### Option 1: Install RENET2 from GitHub 
+### Option 1: Install RENET2 from Bioconda 
+```bash
+
+conda config --add channels defaults
+conda config --add channels bioconda
+conda config --add channels conda-forge
+# create conda environment named "renet2-env"
+conda create -n renet2-env -c bioconda renet2
+conda activate renet2-env
+
+# run renet2 like this afterwards
+renet2 --help
+```
+
+### Option 2: Install RENET2 from GitHub
 
 ```bash
-git clone https://github.com/sujunhao/RENET2.git
-cd RENET2 
+# create renet2 env
+conda create -n renet2-env python=3.7
+conda activate renet2-env
 
-conda create -n renet2 python=3.7
-conda activate renet2
-
+# install required package
 conda install -c conda-forge ruby scikit-learn=0.22.2.post1 pandas=1.0.1 numpy=1.18.1 tqdm=4.42.1
 conda install pytorch==1.2.0 cudatoolkit=10.0 -c pytorch
 
-#install genia sentence splitter from: http://www.nactem.ac.uk/y-matsu/geniass/
-cd tools
-# wget http://www.nactem.ac.uk/y-matsu/geniass/geniass-1.00.tar.gz
-tar -xf geniass-1.00.tar.gz
-cd geniass
-make
-cd ../../
+git clone https://github.com/sujunhao/RENET2.git
+cd RENET2 
+pip install . --no-deps --ignore-installed
+
+# run renet2 like this afterwards
+renet2 --help
 ```
 
-### Option 2: Install RENET2 from Bioconda
-
-(TBD)
-
-
-## Download Data and Trained Models
+## Download Data and Trained Model
 
 Download all required files
 
 ```
-# download data and models
-# make sure you are in the root dir of RENET2
-bash renet2/download_renet2_data.sh
+### if RENET2 is installed from Bioconda
+mkdir RENET2
+cd RENET2
+RENET2_DATA_S_URL=https://raw.githubusercontent.com/sujunhao/RENET2/py_package/src/renet2/download_renet2_data.sh
+curl -s ${RENET2_DATA_S_URL} | bash -s .
+R2_DIR=$(pwd)
+
+### if RENET2 is installed from GitHub
+#### make sure you are in the root dir of RENET2
+bash src/renet2/download_renet2_data.sh .
+R2_DIR=$(pwd)
 ```
 
-Or download individual files via [(manually) Download Data and Trained Models](#manually-download-data-and-trained-models)
-
-
-Quick test after downloaded all required files
+### Quick test after downloaded all required files
 
 ```
 # quick testing
-python renet2/predict_renet2_ft.py --raw_data_dir data/ft_data/ --gda_fn_d data/ft_gda/ --models_number 4 --batch_size 8 --max_doc_num 10 --no_cache_file --use_fix_pretrained_models
-
+# R2_DIR="[DATA/MODEL_PATH]"                                     # e.g. ~/git/RENET2, check 'Download Data and Trained Models'
+renet2 predict --raw_data_dir ${R2_DIR}/data/ft_data/ --gda_fn_d ${R2_DIR}/data/ft_gda/ --models_number 4 --batch_size 8 --max_doc_num 10 --no_cache_file  --model_dir ${R2_DIR}/models/ft_models/
 
 # check predicted results
-# predicted gene-disease associations saved in data/ft_gda/gda_rst.tsv
-less data/ft_gda/gda_rst.tsv
+# predicted gene-disease associations
+less ${R2_DIR}/data/ft_gda/gda_rst.tsv
 ```
 
-## Run RENET2 Model
+## Usage
+
+### General usage
 
 ```
-## make sure you downloaded data and models at the [Download Data and Trained Models] section
-## use --help to check more information
-## use --use_cuda if you want to use GPUs
+# help page for renet2
+renet2 --help
 
+# to run a submodule using python
+renet2 [submodule] [options]
+```
+
+### Setup variables for renet2
+
+```
+R2_DIR="[DATA_MODEL_PATH]"                                     # e.g. ~/git/RENET2, check 'Download Data and Trained Models'
+```
+
+### Run RENET2 Model
+
+```
+## for using RENET2, please make sure that -
+## 1. in RENET2-env environment (using 'conda activate RENET2-env' to setup RENET2 environment)
+## 2. follow the 'Download Data and Trained Models' to download RENET2 dataset and trained models first
+## 3. setup the `R2_DIR` variable as in 'Setup variables for renet2'
+## use --use_cuda if you have GPUs and want to use GPUs
+
+# set RENET2's models dir, noted that trained model already in this dir
+MODEL_DIR=${R2_DIR}/models/ft_models
 
 # train 10 RENET2 models (optional, trained model already in the models dir)
-python renet2/train_renet2_ft.py --raw_data_dir data/ft_data/ --annotation_info_dir data/ft_info --model_dir models/ft_models/ --pretrained_model_p models/Bst_abs_10  --epochs 10 --models_number 10 --batch_size 60 --have_SiDa data/ft_info/ft_base/ft_base --gda_fn_d data/ft_gda/ --use_cuda
-
+MODEL_DIR=${R2_DIR}/models/ft_models_test
+renet2 train --raw_data_dir ${R2_DIR}/data/ft_data/ --annotation_info_dir ${R2_DIR}/data/ft_info --model_dir ${MODEL_DIR} --pretrained_model_p ${R2_DIR}/models/Bst_abs_10  --epochs 10 --models_number 10 --batch_size 60 --have_SiDa ${R2_DIR}/data/ft_info/ft_base/ft_base --gda_fn_d ${R2_DIR}/data/ft_gda/ --use_cuda
 
 # use trained RENET2 models to predict GDAs (using --is_sensitive_mode to enable RENET2-Sensitive mode)
-python renet2/predict_renet2_ft.py --raw_data_dir data/ft_data/ --model_dir models/ft_models/ --models_number 10 --batch_size 60 --gda_fn_d data/ft_gda/ --use_cuda
+renet2 predict --raw_data_dir ${R2_DIR}/data/ft_data/ --model_dir ${MODEL_DIR} --models_number 2 --batch_size 60 --gda_fn_d ${R2_DIR}/data/ft_gda/ --use_cuda
 
 # check predicted GDAs
-less ../data/ft_gda/gda_rst.tsv
+less ${R2_DIR}/data/ft_gda/gda_rst.tsv
 
 # apply 5-fold cross-validation to test RENET2 performance
-python renet2/evaluate_renet2_ft_cv.py --epochs 10 --raw_data_dir data/ft_data/ --annotation_info_dir data/ft_info/ --rst_file_prefix ft_base --have_SiDa data/ft_info/ft_base/ft_base --pretrained_model_p models/Bst_abs_10 --no_cache_file --use_cuda
+renet2 evaluate_renet2_ft_cv --epochs 10 --raw_data_dir ${R2_DIR}/data/ft_data/ --annotation_info_dir ${R2_DIR}/data/ft_info/ --rst_file_prefix ft_base --have_SiDa ${R2_DIR}/data/ft_info/ft_base/ft_base --pretrained_model_p ${R2_DIR}/models/Bst_abs_10 --no_cache_file --use_cuda
 ```
 
-### Pipeline: Use RENET2 to Predict Gene-Disease Associations from Articles ID
+### Pipeline: Use RENET2 to predict Gene-Disease Associations from articles ID
 
     Input: PMID and PMCID list          [example: RENET2/data/test/test_download_pmcid_list.csv]
     Output: Gene-Disease Assoications   [example: will generate at RENET2/data/test_data/gda_rst.tsv]
     
-pipeline with example
+pipeline with example 
 
-Input data: PMID and PMCID list `RENET2/data/test/test_download_pmcid_list.csv`
+Input data: PMID and PMCID list `${R2_DIR}/test/test_download_pmcid_list.csv`
 
 1. download text and NER annotations  
 ```
 # download abstract and its annotations
 # (download abstract is required for the full-text case, as some full-text at PTC did not have an abstract section, should download separately)
-python renet2/download_data.py --process_n 3 --id_f test/test_download_pmcid_list.csv --type abs --dir data/raw_data/abs/ --tmp_hit_f data/test_data/hit_id_l.csv
+renet2 download_data --process_n 3 --id_f ${R2_DIR}/test/test_download_pmcid_list.csv --type abs --dir ${R2_DIR}/data/raw_data/abs/ --tmp_hit_f ${R2_DIR}/data/test_data/hit_id_l.csv
 
 # download full-text and its annotations
-python renet2/download_data.py --process_n 3 --id_f test/test_download_pmcid_list.csv --type ft --dir data/raw_data/ft/ --tmp_hit_f data/test_data/hit_id_l.csv
+renet2 download_data --process_n 3 --id_f ${R2_DIR}/test/test_download_pmcid_list.csv --type ft --dir ${R2_DIR}/data/raw_data/ft/ --tmp_hit_f ${R2_DIR}/data/test_data/hit_id_l.csv
 ```
+
 2. parse text and enetities annotations to RENET2 input format
 ```
 # parse data
-python renet2/parse_data.py --id_f test/test_download_pmcid_list.csv --type 'ft' --in_abs_dir data/raw_data/abs/  --in_ft_dir data/raw_data/ft/ --out_dir data/test_data/
+renet2 install_geniass          # install geniass, only run one time
+conda install ruby              # install ruby
+renet2 parse_data --id_f ${R2_DIR}/test/test_download_pmcid_list.csv --type 'ft' --in_abs_dir ${R2_DIR}/data/raw_data/abs/  --in_ft_dir ${R2_DIR}/data/raw_data/ft/ --out_dir ${R2_DIR}/data/test_data/
 
 # normalize NET ID (optinal) 
-python renet2/normalize_ann.py --in_f data/test_data/anns.txt --out_f data/test_data/anns_n.txt
+renet2 normalize_ann  --in_f ${R2_DIR}/data/test_data/anns.txt  --out_f ${R2_DIR}/data/test_data/anns_n.txt
 ```
 3. run RENET2 on parsed data
 ```
-python renet2/predict_renet2_ft.py --raw_data_dir data/test_data/ --model_dir models/ft_models/ --gda_fn_d data/test_data/ --models_number 4 --batch_size 8 --max_doc_num 10 --no_cache_file 
+MODEL_DIR=${R2_DIR}/models/ft_models          # using the pretrained 10 models at ft_models
+renet2 predict --raw_data_dir ${R2_DIR}/data/test_data/ --model_dir ${R2_DIR}/models/ft_models/ --gda_fn_d ${R2_DIR}/data/test_data/ --models_number 4 --batch_size 8 --max_doc_num 10 --no_cache_file 
 ```
-Output data: predicted Gene-Disease Associations are stored in `RENET2/data/test_data/gda_rst.tsv`
+Output data: predicted Gene-Disease Associations are stored in `${R2_DIR}/data/test_data/gda_rst.tsv`
 
 
 
@@ -224,18 +251,19 @@ Make sure you downloaded data at the [Download Data and Trained Models] section.
 
 ## Modules Descriptions
 
-Modules in `renet2/` are for model training/testing.
+Modules in `renet2` are for model training/testing.
 
 *For the Modules listed below, please use the `-h` or `--help` option for checking available options.*
 
-`renet2/` | source code for RENET2 
+`renet2` | renet2 program
 ---: | ---
-`train_renet2_ft.py` | Module for training RENET2 models.
-`predict_renet2_ft.py` | Using RENET2 models to predict gene-disease associations.
-`evaluate_renet2_ft_cv.py` | Evaluating trained RENET2 models and using cross-validation.
-`train_renet2_ft_cv.py` | Training RENET2 models and using cross-validation to evaluating models performance.
-`download_data.py` | Downloading articles from PMC/PTC with provided PMID/PMCID list. (please check example an RENET2/renet2/pre_precoss/)
-`parse_data.py` | Parsing articles from RENET2. (please check example an RENET2/renet2/pre_precoss/)
+`train` | Module for training RENET2 models.
+`predict` | Using RENET2 models to predict gene-disease associations.
+`evaluate_renet2_ft_cv` | Evaluating trained RENET2 models and using cross-validation.
+`download_data` | Downloading articles from PMC/PTC with provided PMID/PMCID list. (please check example an RENET2/src/nb_scripts/pre_precoss/ for full-text dataset)
+`parse_data` | Parsing articles from RENET2. (please check example an RENET2/src/nb_scripts/pre_precoss/ for full-text dataset)
+`normalize_ann` | Normlize the annotation ID
+`install_geniass` | Install geniass for parse_data module, if fail, please try `conda install ruby` to install ruby first
 
 
 ## Benchmark
@@ -250,7 +278,8 @@ git clone git@bitbucket.org:ibi_group/befree.git
 
 wget http://www.bio8.cs.hku.hk/RENET2/renet2_bm_befree.tar.gz
 tar -xf renet2_bm_befree.tar.gz
-#run Generate_BeFree_Input.ipynb on python jypyter notebook to genrate BeFree input
+# get BeFree input
+run Generate_BeFree_Input.ipynb on python jypyter notebook to genrate BeFree input
 sh benchmark_befree.sh
 ```
 
@@ -259,7 +288,8 @@ sh benchmark_befree.sh
 cd benchmark/DTMiner
 wget http://www.bio8.cs.hku.hk/RENET2/renet2_bm_dtminer.tar.gz
 tar -xf renet2_bm_dtminer.tar.gz
-#run Generate_DTMiner_Input.ipynb on python jypyter notebook to genrate BeFree input
+# get DTMiner input
+run Generate_DTMiner_Input.ipynb on python jypyter notebook to genrate BeFree input
 sh benchmark_DTMiner.sh 
 ```
 
@@ -280,40 +310,18 @@ sh run_bert.sh
 ### Benchmark (Using RENET2 Cross-validation to Evalutate RENET2/BeFree/DTMiner/BioBERT Results)
 
 ```
-
-python evaluate_renet2_ft_cv.py --epochs 10 --raw_data_dir ../data/ft_data/  --rst_file_prefix ft_base --have_SiDa ../data/ft_info/ft_base/ft_base
+renet2 evaluate_renet2_ft_cv --epochs 10 --raw_data_dir ${R2_DIR}/data/ft_data/ --annotation_info_dir ${R2_DIR}/data/ft_info/ --rst_file_prefix ft_base --have_SiDa ${R2_DIR}/data/ft_info/ft_base/ft_base --pretrained_model_p ${R2_DIR}/models/Bst_abs_10 --no_cache_file --use_cuda
 ```
 
 ### Benchmark RENET2 on Abstract Data
 
 ```
 # training RENET2 model on abstract data
-run ./renet2/build_best_model_abs.ipynb on jupyter notebook
+run ./src/nb_scripts/build_best_model_abs.ipynb on jupyter notebook
 # Using cross-validation to benchmarking RENET2 on abstract data
-run ./renet2/exp_abs.ipynb on jupyter notebook
+run ./src/nb_scripts/exp_abs.ipynb on jupyter notebook
 ```
 
-
-## (Optional) Data Preparing
-
-Download/parse data from PubMed/PubTator Central
-
-Please provide your list at `RENET2/data dir`, examples of pmid list can be found at `RENET2/data/test_download_pmid_list.csv` (for abstract) or `RENET2/data/test_download_pmcid_list.csv` (for full-text).
-
-```
-cd renet2
-
-# downloading data
-# testing download abstracts data 
-python renet2/download_data.py --process_n 3 --id_f test/test_download_pmcid_list.csv --type abs --dir data/raw_data/abs/ --tmp_hit_f data/test_data/hit_id_l.csv
-# testing download full-text data
-python renet2/download_data.py --process_n 3 --id_f test/test_download_pmcid_list.csv --type ft --dir data/raw_data/ft/ --tmp_hit_f data/test_data/hit_id_l.csv
-
-# parsing data
-python renet2/parse_data.py --id_f test/test_download_pmcid_list.csv --type 'ft' --in_abs_dir data/raw_data/abs/  --in_ft_dir data/raw_data/ft/ --out_dir data/test_data/
-# (optional) normalize annotated ID
-python renet2/normalize_ann.py --in_f data/test_data/anns.txt --out_f data/test_data/anns_n.txt
-```          
 
 ## (Optional) Visualization
 
@@ -321,45 +329,8 @@ Found and visualze a pair of gene-disease annotation obtrained from Pubtar Centr
 
 
 ```
-run ./renet2/vis_text.ipynb on jupyter notebook
+run ./src/nb_scripts/vis_text.ipynb on jupyter notebook
 ```
-![RENET2 vis](/data/image/RENET2_vis.png "RENET2 vis")
+![RENET2 vis](/repo_f/RENET2_vis.png "RENET2 vis")
 
 
-## (Manually) Download Data and Trained Models
-
-```
-# download data
-## download abstract dataset [dir: renet2/data/abs_data]
-cd data/abs_data
-wget http://www.bio8.cs.hku.hk/RENET2/renet2_abs_data.tar.gz
-tar -xf renet2_abs_data.tar.gz
-cd ../..
-
-## download full-text dataset [dir: renet2/data/ft_data]
-cd data/ft_data
-wget http://www.bio8.cs.hku.hk/RENET2/renet2_ft_data.tar.gz
-tar -xf renet2_ft_data.tar.gz
-cd ../..
-
-## download gene-disease assoications found from PMC and LitCovid [dir: renet2/data/pmc_litcovid]
-cd data
-wget http://www.bio8.cs.hku.hk/RENET2/renet2_gda_pmc_litcovid_rst.tar.gz
-tar -xf renet2_gda_pmc_litcovid_rst.tar.gz
-cd ..
-
-
-# download trained model
-## download trained abstract model [dir: renet2/models/abs_models]
-cd models
-wget http://www.bio8.cs.hku.hk/RENET2/renet2_trained_models_abs.tar.gz
-tar -xf renet2_trained_models_abs.tar.gz
-cd ..
-
-## download trained abstract model [dir: renet2/models/ft_models]
-cd models
-wget http://www.bio8.cs.hku.hk/RENET2/renet2_trained_models_ft.tar.gz
-tar -xf renet2_trained_models_ft.tar.gz
-cd ../..
-
-```
