@@ -17,6 +17,7 @@ Relation extraction is a fundamental task for extracting gene-disease associatio
 
 ## Contents
 
+- [What's new](#whats-new)
 - [Installation](#installation)
 - [Download Data and Trained Models](#download-data-and-trained-models)
 - [Usage](#usage)
@@ -29,6 +30,11 @@ Relation extraction is a fundamental task for extracting gene-disease associatio
 
 ---
 
+## What's new?
+
+- 20210330
+
+we can install RENET2 via bioconda now! and the code for the RENET2 is refined as a python package.
 
 ## Installation
 
