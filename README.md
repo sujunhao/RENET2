@@ -87,7 +87,7 @@ R2_DIR=$(pwd)
 
 ```
 # quick testing
-R2_DIR="[DATA/MODEL_PATH]"                                     # e.g. ~/git/RENET2, check 'Download Data and Trained Models'
+# R2_DIR="[DATA/MODEL_PATH]"                                     # e.g. ~/git/RENET2, check 'Download Data and Trained Models'
 renet2 predict --raw_data_dir ${R2_DIR}/data/ft_data/ --gda_fn_d ${R2_DIR}/data/ft_gda/ --models_number 4 --batch_size 8 --max_doc_num 10 --no_cache_file  --model_dir ${R2_DIR}/models/ft_models/
 
 # check predicted results
