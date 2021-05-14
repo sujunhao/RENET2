@@ -31,9 +31,15 @@ Relation extraction is a fundamental task for extracting gene-disease associatio
 
 ## What's new?
 
+- 20210514
+
+    Update README with data link: [http://www.bio8.cs.hku.hk/RENET2/renet2_data_models.tar.gz](http://www.bio8.cs.hku.hk/RENET2/renet2_data_models.tar.gz)
+    
+    Add RENET testing script at full-text dataset
+
 - 20210330
 
-we can install RENET2 via bioconda now! and the code for the RENET2 is refined as a python package.
+    We can install RENET2 via bioconda now! and the code for the RENET2 is refined as a python package.
 
 ## Installation
 
@@ -70,9 +76,11 @@ pip install . --no-deps --ignore-installed
 renet2 --help
 ```
 
-## Download Data and Trained Model
+## Download Data and Trained Models
 
 Download all required files
+
+All data and models are available at this link: [http://www.bio8.cs.hku.hk/RENET2/renet2_data_models.tar.gz](http://www.bio8.cs.hku.hk/RENET2/renet2_data_models.tar.gz), please using the following scripts to download data for RENET2.
 
 ```
 ### if RENET2 is installed from Bioconda
@@ -305,6 +313,13 @@ run Generate_BioBERT_Input.ipynb on python jypyter notebook
 
 # run BioBERT
 sh run_bert.sh
+```
+
+### Run RENET (on full-text)
+```
+cd benchmark
+
+run Generate_RENET_Input.ipynb on python jypyter notebook
 ```
 
 ### Benchmark (Using RENET2 Cross-validation to Evalutate RENET2/BeFree/DTMiner/BioBERT Results)
