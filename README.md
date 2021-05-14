@@ -35,7 +35,7 @@ Relation extraction is a fundamental task for extracting gene-disease associatio
 
     Update README with data link: [http://www.bio8.cs.hku.hk/RENET2/renet2_data_models.tar.gz](http://www.bio8.cs.hku.hk/RENET2/renet2_data_models.tar.gz)
     
-    Add RENET testing script at full-text dataset
+    Add RENET testing script for full-text dataset
 
 - 20210330
 
