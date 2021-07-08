@@ -158,7 +158,7 @@ renet2 evaluate_renet2_ft_cv --epochs 10 --raw_data_dir ${R2_DIR}/data/ft_data/ 
 
 ### Pipeline: Use RENET2 to predict Gene-Disease Associations from articles ID
 
-    Input: PMID and PMCID list          [example: RENET2/data/test/test_download_pmcid_list.csv]
+    Input: PMID and PMCID list          [example: RENET2/test/test_download_pmcid_list.csv]
     Output: Gene-Disease Assoications   [example: will generate at RENET2/data/test_data/gda_rst.tsv]
     
 pipeline with example 
@@ -182,7 +182,7 @@ renet2 install_geniass          # install geniass, only run one time
 conda install ruby              # install ruby
 renet2 parse_data --id_f ${R2_DIR}/test/test_download_pmcid_list.csv --type 'ft' --in_abs_dir ${R2_DIR}/data/raw_data/abs/  --in_ft_dir ${R2_DIR}/data/raw_data/ft/ --out_dir ${R2_DIR}/data/test_data/
 
-# normalize NET ID (optinal) 
+# normalize NET ID
 renet2 normalize_ann  --in_f ${R2_DIR}/data/test_data/anns.txt  --out_f ${R2_DIR}/data/test_data/anns_n.txt
 ```
 3. run RENET2 on parsed data
