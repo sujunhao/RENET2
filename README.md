@@ -33,7 +33,11 @@ RENET2 is published in [*NAR Genomics and Bioinformatics*](https://academic.oup.
 ---
 
 ## What's new?
-
+- 20210716
+    
+    The paper of RENET2 is avaiable in [*NAR Genomics and Bioinformatics*](https://academic.oup.com/nargab/article/3/3/lqab062/6315218).
+    We fix a mistake of the empty parsed dataset, and updated the parsed full-text dataset in data/ft_data
+    
 - 20210514
 
     Update README with data link: [http://www.bio8.cs.hku.hk/RENET2/renet2_data_models.tar.gz](http://www.bio8.cs.hku.hk/RENET2/renet2_data_models.tar.gz). The full-test annotated dataset is available at `/data/ft_info folder` in the download files. Please check this [link1](#download-data-and-trained-models) and [link2](#annotated-gene-disease-associations-based-on-iterative-training-data-expansion) for more detail.
