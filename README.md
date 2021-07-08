@@ -36,7 +36,7 @@ RENET2 is published in [*NAR Genomics and Bioinformatics*](https://academic.oup.
 - 20210716
     
     The paper of RENET2 is avaiable in [*NAR Genomics and Bioinformatics*](https://academic.oup.com/nargab/article/3/3/lqab062/6315218).
-    We fix a mistake of the empty parsed dataset, and updated the parsed full-text dataset in data/ft_data
+    We updated the empty parsed dataset, and updated the parsed full-text dataset in data/ft_data.
     
 - 20210514
 
