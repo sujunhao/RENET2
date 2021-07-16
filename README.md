@@ -16,11 +16,13 @@ Relation extraction (RE) is a fundamental task for extracting gene–disease ass
 
 RENET2 is published in [*NAR Genomics and Bioinformatics*](https://academic.oup.com/nargab/article/3/3/lqab062/6315218).
 
+
 ---
 
 ## Contents
 
 - [What's new](#whats-new)
+- [Reference for application](#reference-for-application)
 - [Installation](#installation)
 - [Download Data and Trained Models](#download-data-and-trained-models)
 - [Usage](#usage)
@@ -46,6 +48,11 @@ RENET2 is published in [*NAR Genomics and Bioinformatics*](https://academic.oup.
 - 20210330
 
     We can install RENET2 via bioconda now! and the code for the RENET2 is refined as a python package.
+    
+## Reference for Application:
+
+- Microsoft's [BiomedNLP-PubMedBERT](https://huggingface.co/jambo/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext-finetuned-renet), from [James Morrill](https://github.com/jambo6). It achieves an F1 score of 0.8 at the abstract dataset.
+
 
 ## Installation
 
