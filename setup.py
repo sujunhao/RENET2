@@ -13,7 +13,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="renet2", # Replace with your own username
-    version="1.2",
+    version="1.3",
     author="Su Junhao",
     author_email="jhsu@cs.hku.hk",
     description="High-Performance Full-text Gene-Disease Relation Extraction with Iterative Training Data Expansion",

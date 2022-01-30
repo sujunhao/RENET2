@@ -63,6 +63,8 @@ def renet2_evaluate(args, _read_batch_idx=0, loaded_feature=None):
     for _i in range(1, args.models_number+1):
         #continue
         model_name_prefix = 'bst_ft_build_%02d' % (_i)
+        if args.model_name != '':
+            model_name_prefix = '%s' % (args.model_name)
         checkpoint_f = os.path.join(args.model_dir, model_name_prefix + ".ckp")
         config_save_f = os.path.join(args.model_dir,  model_name_prefix + ".cf")
 
@@ -78,11 +80,11 @@ def renet2_evaluate(args, _read_batch_idx=0, loaded_feature=None):
         model.update_model_config(config)
 
         if torch.cuda.device_count() > 1:
-    	    #print("use", torch.cuda.device_count(), "GPUs!")
-    	    model = nn.DataParallel(model)
-	
+            #print("use", torch.cuda.device_count(), "GPUs!")
+            model = nn.DataParallel(model)
+    
         model.to(args.device)
-	        
+            
         pred_l, tru_l, S, pred_o = eval(model, dataloader_ft_sub, args, 'test')
         if not args.no_cuda:
             free_cuda()
@@ -94,6 +96,8 @@ def renet2_evaluate(args, _read_batch_idx=0, loaded_feature=None):
         cls_rst_file = os.path.join(args.gda_fn_d, "gda_rst_%02d.tsv" % (_i))
         y_info.to_csv(cls_rst_file, sep='\t', index=False)
         print('rst at {}'.format(cls_rst_file))
+        if args.model_name != '':
+            break
     global _G_eval_time
     _G_eval_time += (time.time() - _m_start_time)
 
@@ -115,7 +119,7 @@ def renet2_evaluate(args, _read_batch_idx=0, loaded_feature=None):
     
     m_df['hit_cnt'] = m_df.apply(lambda x: sum([x['pred_%02d'%(_i+1)] for _i in range(args.models_number)]), axis=1)
     
-    _cutoff = int(args.models_number/2)
+    _cutoff = max(1, int(args.models_number/2))
     if args.is_sensitive_mode:
         _cutoff = 1
 
@@ -137,21 +141,23 @@ def renet2_evaluate(args, _read_batch_idx=0, loaded_feature=None):
 
 
     def read_ann(file_p):
-    	anns = []
-    	with open(file_p, 'r') as F:
-    	    while True:
-    	        line = F.readline()
-    	        if line == '':
-    	            break
-    	        if line == '\n':
-    	            continue
-    	        ann = line.strip().split('\t')
-#   	          print(ann)
-    	        anns.append(ann)
-#   	          break
-    	header_list = ["pmid", "off_a", "off_b", "name", "type", "id", 's_i']
-    	anns = pd.DataFrame(anns, columns = header_list) 
-    	return anns
+        anns = []
+        with open(file_p, 'r') as F:
+            while True:
+                line = F.readline()
+                if line == '':
+                    break
+                if line == '\n':
+                    continue
+                ann = line.strip().split('\t')
+                anns.append(ann)
+        try:
+            header_list = ["pmid", "off_a", "off_b", "name", "type", "id", 's_i']
+            anns = pd.DataFrame(anns, columns = header_list)
+        except:
+            header_list = ["pmid", "off_a", "off_b", "name", "type", "id"]
+            anns = pd.DataFrame(anns, columns = header_list)
+        return anns
 
     start_time = time.time()
     print('generate GDA table, getting NER names, and merge tatble')
@@ -203,7 +209,7 @@ def renet2_evaluate(args, _read_batch_idx=0, loaded_feature=None):
     cls_rst_file = os.path.join(args.gda_fn_d, "gda_rst.tsv")
     if _read_batch_idx != 0:
         cls_rst_file = os.path.join(args.gda_fn_d, "gda_rst_%03d.tsv" % (_read_batch_idx))
-    print('Final Found Positive GDA records at [# %d]:\n***  %s  ***' % (tar_set.shape[0], cls_rst_file))
+    print('Final Found Positive GDA predictions at [# %d]:\n***  %s  ***' % (tar_set.shape[0], cls_rst_file))
     tar_set.to_csv(cls_rst_file, sep='\t', index=False)
 
 
@@ -222,7 +228,15 @@ def init_self_parser():
             "--model_dir",
             default = "../models/ft_models/",
             type=str,
-            help="modle data dir",
+            help="model data dir",
+    )
+
+
+    parser.add_argument(
+            "--model_name",
+            default = "",
+            type=str,
+            help="model name",
     )
 
     parser.add_argument(
@@ -347,7 +361,7 @@ def main():
     device = torch.device('cuda' if use_cuda else 'cpu')
     if use_cuda:
         if torch.cuda.device_count() > 1:
-    	    print("will use", torch.cuda.device_count(), "GPUs!")
+            print("will use", torch.cuda.device_count(), "GPUs!")
     #device = torch.device('cuda:1')
 
     torch.manual_seed(args.seed)

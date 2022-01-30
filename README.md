@@ -202,6 +202,24 @@ renet2 predict --raw_data_dir ${R2_DIR}/data/test_data/ --model_dir ${R2_DIR}/mo
 ```
 Output data: predicted Gene-Disease Associations are stored in `${R2_DIR}/data/test_data/gda_rst.tsv`
 
+### Example of running RENET2 Model on abstract data
+
+to try run RENET2 on abstract, you can using the code as:
+```
+renet2 predict --raw_data_dir ${R2_DIR}/data/abs_data/2nd_ann/ \
+--model_dir ${R2_DIR}/models/ \
+--gda_fn_d ${R2_DIR}/data/test_data/ \
+--models_number 1 \
+--model_name Bst_abs_10 \
+--batch_size 8 \
+--no_cache_file \
+--fix_snt_n 32 \
+--file_name_ann anns.txt
+
+# then go to benchmark folder and run the following to checked the trained models
+python calculate_metrics_with_input.py ${R2_DIR}/data/abs_data/2nd_ann/labels.txt ${R2_DIR}/data/test_data/gda_rst.tsv
+
+```
 
 
 ## Understand Output File
@@ -349,6 +367,11 @@ run ./src/nb_scripts/build_best_model_abs.ipynb on jupyter notebook
 # Using cross-validation to benchmarking RENET2 on abstract data
 run ./src/nb_scripts/exp_abs.ipynb on jupyter notebook
 ```
+
+
+note that RENET2 can benchmark should be benchmark on abstract data via cross validation.
+
+
 
 
 ## (Optional) Visualization
